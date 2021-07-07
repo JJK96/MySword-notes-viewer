@@ -66,9 +66,4 @@ def chapter(book, chapter):
                 title=note[8]
             ))
     chapter = f"Hoofdstuk {chapter}"
-    return render_template('verse.html', notes=notes, chapter=chapter)
-
-
-# @app.route("/<int:book>/<int:chapter>/<int:verse>")
-# def verse(book, chapter, verse):
-#     return 'Note text'
+    return render_template('chapter.html', notes=notes, chapter=chapter)
