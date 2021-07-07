@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Hoofdstuk</h1>
+<ul>
+    {% for path,text in paths.items() %}
+        <li><a href="{{path}}">{{text}}</a></li>
+    {% endfor %}
+</ul>
+{% endblock %}

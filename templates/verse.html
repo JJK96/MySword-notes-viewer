@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>{{chapter}}</h1>
+<hr>
+{% for note in notes %}
+    <div class="note">
+        <h1>Vers {{note.fromverse}}</h1>
+        <div class="note-content">
+            {{note.data | safe}}
+        </div>
+    </div>
+    <hr>
+{% endfor %}
+{% endblock %}
