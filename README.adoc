@@ -1,0 +1,8 @@
+= MySword Notes viewer
+
+Display notes from versenotes.mybible in a website.
+
+== Usage
+
+Put a versenotes.mybible from MySword android app in the root of this repo.
+Start the flask application either directly or using WSGI
