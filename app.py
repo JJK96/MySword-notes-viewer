@@ -3,11 +3,15 @@ from dataclasses import dataclass
 from datetime import datetime
 from bs4 import BeautifulSoup
 import sqlite3
+import os
 
 app = Flask(__name__)
 
+
 def get_db():
-    return sqlite3.connect('versenotes.mybible')
+    dirname = os.path.dirname(__file__)
+    filename = os.path.join(dirname, 'versenotes.mybible')
+    return sqlite3.connect(filename)
 
 
 @dataclass
@@ -37,14 +41,14 @@ def books():
     return render_template('books.html')
 
 
-@app.route("/<int:book>")
+@app.route("/<int:book>/")
 def book(book):
     paths = {}
     with get_db() as db:
         result = db.execute('select distinct chapter from commentary where book = ?', (book,))
-        for i, row in enumerate(result):
-            path = "/{}/{}".format(book, row[0])
-            paths[path] = str(i+1)
+        for row in result:
+            path = str(row[0])
+            paths[path] = str(row[0])
     return render_template('book.html', paths=paths)
 
 
