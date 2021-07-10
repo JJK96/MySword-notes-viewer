@@ -11,6 +11,7 @@
     </div>
     <hr>
 {% endfor %}
+<div class="spacer"></div>
 <nav>
     <div class="nav-btn prev">
         <a href="{{chapter - 1}}">&#x3C;</a>
@@ -49,6 +50,9 @@ nav {
 .nav-btn > a {
     color: inherit; /* blue colors for links too */
     text-decoration: inherit; /* no underline */
+}
+.spacer {
+    height: 7em;
 }
 </style>
 {% endblock %}
