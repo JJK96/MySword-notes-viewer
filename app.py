@@ -65,5 +65,5 @@ def chapter(book, chapter):
                 date=note[6],
                 title=note[8]
             ))
-    chapter = f"Hoofdstuk {chapter}"
-    return render_template('chapter.html', notes=notes, chapter=chapter)
+    title = f"Hoofdstuk {chapter}"
+    return render_template('chapter.html', notes=notes, title=title, chapter=chapter)
