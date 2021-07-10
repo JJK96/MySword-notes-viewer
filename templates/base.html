@@ -4,6 +4,44 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         {% block header %}
         {% endblock %}
+        <style>
+        nav {
+            box-sizing: border-box;
+            position: fixed;
+            bottom: 15px;
+            left: 0px;
+            width: 100%;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .nav-btn {
+            font-size: 50px;
+            font-weight: bold;
+            height: 100%;
+            width: 70px;
+            height: 70px;
+            background: white;
+            border-radius: 100px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 1px 1px 1px black;
+        }
+        .up {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            font-size: 40px;
+        }
+        a.nav-btn {
+            color: inherit; /* blue colors for links too */
+            text-decoration: inherit; /* no underline */
+        }
+        .spacer {
+            height: 7em;
+        }
+        </style>
     </head>
     <body>
         {% block content %}
