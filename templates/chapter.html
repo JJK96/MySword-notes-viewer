@@ -12,6 +12,9 @@
     <hr>
 {% endfor %}
 <div class="spacer"></div>
+<div class="nav-btn up">
+    <a href=".">/\</a>
+</div>
 <nav>
     <div class="nav-btn prev">
         <a href="{{chapter - 1}}">&#x3C;</a>
@@ -35,17 +38,23 @@ nav {
     justify-content: space-between;
 }
 .nav-btn {
-    font-size: 500%;
+    font-size: 80px;
     font-weight: bold;
     height: 100%;
-    width: 1em;
-    height: 1em;
+    width: 100px;
+    height: 100px;
     background: white;
     border-radius: 100px;
     display: flex;
     justify-content: center;
     align-items: center;
     box-shadow: 1px 1px 1px black;
+}
+.up {
+    position: fixed;
+    top: 15px;
+    right: 15px;
+    font-size: 60px;
 }
 .nav-btn > a {
     color: inherit; /* blue colors for links too */
