@@ -1,5 +1,9 @@
 {% extends "base.html" %}
 {% block content %}
+<form method="GET" action="search">
+    <input name="q" placeholder="Zoeken..."/>
+    <button type="submit">Zoek</button>
+</form>
 <ul>
     <li><a href="1/">Genesis</a></li>
     <li><a href="2/">Exodus</a></li>
