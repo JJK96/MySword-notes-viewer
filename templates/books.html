@@ -5,71 +5,8 @@
     <button type="submit">Zoek</button>
 </form>
 <ul>
-    <li><a href="1/">Genesis</a></li>
-    <li><a href="2/">Exodus</a></li>
-    <li><a href="3/">Leviticus</a></li>
-    <li><a href="4/">Numeri</a></li>
-    <li><a href="5/">Deuteronomium</a></li>
-    <li><a href="6/">Jozua</a></li>
-    <li><a href="7/">Richteren</a></li>
-    <li><a href="8/">Ruth</a></li>
-    <li><a href="9/">1 Samuel</a></li>
-    <li><a href="10/">2 Samuel</a></li>
-    <li><a href="11/">1 Koningen</a></li>
-    <li><a href="12/">2 Koningen</a></li>
-    <li><a href="13/">1 Kronieken</a></li>
-    <li><a href="14/">2 Kronieken</a></li>
-    <li><a href="15/">Ezra</a></li>
-    <li><a href="16/">Nehemia</a></li>
-    <li><a href="17/">Esther</a></li>
-    <li><a href="18/">Job</a></li>
-    <li><a href="19/">Psalmen</a></li>
-    <li><a href="20/">Spreuken</a></li>
-    <li><a href="21/">Prediker</a></li>
-    <li><a href="22/">Hooglied</a></li>
-    <li><a href="23/">Jesaja</a></li>
-    <li><a href="24/">Jeremia</a></li>
-    <li><a href="25/">Klaagliederen</a></li>
-    <li><a href="26/">Ezechiel</a></li>
-    <li><a href="27/">Daniel</a></li>
-    <li><a href="28/">Hosea</a></li>
-    <li><a href="29/">Joel</a></li>
-    <li><a href="30/">Amos</a></li>
-    <li><a href="31/">Obadja</a></li>
-    <li><a href="32/">Jona</a></li>
-    <li><a href="33/">Micha</a></li>
-    <li><a href="34/">Nahum</a></li>
-    <li><a href="35/">Habakuk</a></li>
-    <li><a href="36/">Sefanja</a></li>
-    <li><a href="37/">Haggai</a></li>
-    <li><a href="38/">Zacharia</a></li>
-    <li><a href="39/">Maleachi</a></li>
-    <li><a href="40/">Mattheus</a></li>
-    <li><a href="41/">Markus</a></li>
-    <li><a href="42/">Lukas</a></li>
-    <li><a href="43/">Johannes</a></li>
-    <li><a href="44/">Handelingen</a></li>
-    <li><a href="45/">Romeinen</a></li>
-    <li><a href="46/">1 Korinthiers</a></li>
-    <li><a href="47/">2 Korinthiers</a></li>
-    <li><a href="48/">Galaten</a></li>
-    <li><a href="49/">Efeziers</a></li>
-    <li><a href="50/">Filippenzen</a></li>
-    <li><a href="51/">Kolossenzen</a></li>
-    <li><a href="52/">1 Tessalonicenzen</a></li>
-    <li><a href="53/">2 Tessalonicenzen</a></li>
-    <li><a href="54/">1 Timotheus</a></li>
-    <li><a href="55/">2 Timotheus</a></li>
-    <li><a href="56/">Titus</a></li>
-    <li><a href="57/">Filemon</a></li>
-    <li><a href="58/">Hebreeen</a></li>
-    <li><a href="59/">Jakobus</a></li>
-    <li><a href="60/">1 Petrus</a></li>
-    <li><a href="61/">2 Petrus</a></li>
-    <li><a href="62/">1 Johannes</a></li>
-    <li><a href="63/">2 Johannes</a></li>
-    <li><a href="64/">3 Johannes</a></li>
-    <li><a href="65/">Judas</a></li>
-    <li><a href="66/">Openbaring</a></li>
+    {% for i, book in books.items() %}
+        <li><a href="{{i}}/">{{book}}</a></li>
+    {% endfor %}
 </ul>
 {% endblock %}

@@ -2,7 +2,7 @@ from flask import Flask, render_template, request
 from dataclasses import dataclass
 from datetime import datetime
 from bs4 import BeautifulSoup
-from books import get_book
+from books import get_book, books as book_list
 import sqlite3
 import os
 
@@ -38,10 +38,23 @@ class Note(NoteBase):
             title.extract()
         return soup
 
+    @classmethod
+    def from_db(self, note):
+        return Note(
+            fromverse=note[3],
+            toverse=note[4],
+            data=note[5],
+            date=note[6],
+            title=note[8],
+            book=note[1],
+            chapter=note[2],
+        )
+
 
 @app.route("/")
 def books():
-    return render_template('books.html')
+    book_dict = {i+1: book for i, book in enumerate(book_list)}
+    return render_template('books.html', books=book_dict)
 
 
 @app.route("/search")
@@ -52,15 +65,7 @@ def search():
     with get_db() as db:
         result = db.execute('select * from commentary where title like ? or data like ?', (query, query))
         for note in result:
-            notes.append(Note(
-                fromverse=note[3],
-                toverse=note[4],
-                data=note[5],
-                date=note[6],
-                title=note[8],
-                book=note[1],
-                chapter=note[2],
-            ))
+            notes.append(Note.from_db(note))
     return render_template('search.html', notes=notes, title="Resultaten")
 
 
@@ -81,12 +86,6 @@ def chapter(book, chapter):
     with get_db() as db:
         result = db.execute('select * from commentary where book = ? and chapter = ?', (book, chapter))
         for note in result:
-            notes.append(Note(
-                fromverse=note[3],
-                toverse=note[4],
-                data=note[5],
-                date=note[6],
-                title=note[8]
-            ))
+            notes.append(Note.from_db(note))
     title = f"Hoofdstuk {chapter}"
     return render_template('chapter.html', notes=notes, title=title, chapter=chapter)
