@@ -3,13 +3,9 @@
 <h1>{{title}}</h1>
 <hr>
 {% for note in notes %}
-    <div class="note">
-        <h1>Vers {{note.fromverse}}</h1>
-        <div class="note-content">
-            {{note.data | safe}}
-        </div>
-    </div>
-    <hr>
+    {% with title="Vers {}".format(note.fromverse) %}
+        {% include "note.html" %}
+    {% endwith %}
 {% endfor %}
 <div class="spacer"></div>
 <a class="nav-btn up" href=".">

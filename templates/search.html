@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block content %}
+{% for note in notes %}
+    {% with title="{} {}:{}".format(note.book, note.chapter, note.fromverse) %}
+        {% include "note.html" %}
+    {% endwith %}
+{% endfor %}
+<a class="nav-btn up" href=".">
+    <span>&#x3C;</span>
+</a>
+{% endblock %}

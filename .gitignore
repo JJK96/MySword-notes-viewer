@@ -1,2 +1,3 @@
 __pycache__
 *.mybible
+.DS_Store

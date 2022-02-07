@@ -1,7 +1,8 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 from dataclasses import dataclass
 from datetime import datetime
 from bs4 import BeautifulSoup
+from books import get_book
 import sqlite3
 import os
 
@@ -21,12 +22,14 @@ class NoteBase:
     data: str
     date: datetime
     title: str
+    book: str = None
+    chapter: int = None
 
 
 class Note(NoteBase):
-    def __init__(self, data=None, **kwargs):
+    def __init__(self, data=None, book=None, **kwargs):
         data = self.transform_data(data)
-        super().__init__(data=data, **kwargs)
+        super().__init__(data=data, book=get_book(book), **kwargs)
 
     def transform_data(self, data):
         # Delete titles
@@ -39,6 +42,26 @@ class Note(NoteBase):
 @app.route("/")
 def books():
     return render_template('books.html')
+
+
+@app.route("/search")
+def search():
+    query = request.args.get("q")
+    query = "%" + query + "%"
+    notes = []
+    with get_db() as db:
+        result = db.execute('select * from commentary where title like ? or data like ?', (query, query))
+        for note in result:
+            notes.append(Note(
+                fromverse=note[3],
+                toverse=note[4],
+                data=note[5],
+                date=note[6],
+                title=note[8],
+                book=note[1],
+                chapter=note[2],
+            ))
+    return render_template('search.html', notes=notes, title="Resultaten")
 
 
 @app.route("/<int:book>/")
@@ -56,7 +79,7 @@ def book(book):
 def chapter(book, chapter):
     notes = []
     with get_db() as db:
-        result = db.execute('select * from commentary where book = ? and chapter = ?', (book,chapter))
+        result = db.execute('select * from commentary where book = ? and chapter = ?', (book, chapter))
         for note in result:
             notes.append(Note(
                 fromverse=note[3],

@@ -43,9 +43,16 @@
         .spacer {
             height: 7em;
         }
+        search {
+            font-size: 2em;
+        }
         </style>
     </head>
     <body>
+        <form method="GET" action="/search">
+            <input name="q" placeholder="Zoeken..."/>
+            <button type="submit">Zoek</button>
+        </form>
         {% block content %}
         {% endblock %}
     </body>
