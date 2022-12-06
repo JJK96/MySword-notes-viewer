@@ -1,0 +1,2 @@
+#min hour day_of_month month day_of_week
+30 8 * * * /srv/notes_opa/downloader.sh >/dev/null 2>&1
