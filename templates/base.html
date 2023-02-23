@@ -128,6 +128,7 @@
             }
 
             var bcv = new bcv_parser;
+            bcv.set_options({sequence_combination_strategy: "separate"})
             for (const note_content of document.getElementsByClassName('note-content')) {
                 var new_text = ""
                 var last_index = 0
