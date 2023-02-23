@@ -1,0 +1,22 @@
+{
+  "name": "bible_notes",
+  "version": "1.0.0",
+  "description": "View notes of the MySword app on a website",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JJK96/MySword-notes-viewer.git"
+  },
+  "author": "Jan-Jaap Korpershoek",
+  "license": "UNLICENSE",
+  "bugs": {
+    "url": "https://github.com/JJK96/MySword-notes-viewer/issues"
+  },
+  "homepage": "https://github.com/JJK96/MySword-notes-viewer#readme",
+  "dependencies": {
+    "bible-passage-reference-parser": "^2.0.1"
+  }
+}

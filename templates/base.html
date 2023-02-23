@@ -51,5 +51,96 @@
     <body>
         {% block content %}
         {% endblock %}
+        <script src="{{ url_for('static', filename='nl_bcv_parser.js') }}"></script>
+        <script>
+            var conversion_table = {
+                "Gen": "GEN",
+                "Exod": "EXO",
+                "Lev": "LEV",
+                "Num": "NUM",
+                "Deut": "DEU",
+                "Josh": "JOS",
+                "Judg": "JDG",
+                "Ruth": "RUT",
+                "1Sam": "1sa",
+                "2Sam": "2sa",
+                "1Kgs": "1ki",
+                "2Kgs": "2ki",
+                "1Chr": "1ch",
+                "2Chr": "2ch",
+                "Ezra": "EZR",
+                "Neh": "NEH",
+                "Esth": "EST",
+                "Job": "JOB",
+                "Ps": "PSA",
+                "Prov": "PRO",
+                "Eccl": "ecc",
+                "Song": "sng",
+                "Isa": "ISA",
+                "Jer": "JER",
+                "Lam": "LAM",
+                "Ezek": "EZK",
+                "Dan": "DAN",
+                "Hos": "HOS",
+                "Joel": "JOL",
+                "Amos": "AMO",
+                "Obad": "OBA",
+                "Jonah": "JON",
+                "Mic": "MIC",
+                "Nah": "NAM",
+                "Hab": "HAB",
+                "Zeph": "ZEP",
+                "Hag": "HAG",
+                "Zech": "ZEC",
+                "Mal": "MAL",
+                "Matt": "MAT",
+                "Mark": "MRK",
+                "Luke": "LUK",
+                "John": "JHN",
+                "Acts": "ACT",
+                "Rom": "ROM",
+                "1Cor": "1co",
+                "2Cor": "2co",
+                "Gal": "GAL",
+                "Eph": "EPH",
+                "Phil": "PHP",
+                "Col": "COL",
+                "1Thess": "1th",
+                "2Thess": "2th",
+                "1Tim": "1ti",
+                "2Tim": "2ti",
+                "Titus": "TIT",
+                "Phlm": "PHM",
+                "Heb": "HEB",
+                "Jas": "JAS",
+                "1Pet": "1pe",
+                "2Pet": "2pe",
+                "1John": "1jn",
+                "2John": "2jn",
+                "3John": "3jn",
+                "Jude": "JUD",
+                "Rev": "REV",
+            }
+            function to_paratext(osis) {
+                var splitted = osis.split('.')
+                splitted[0] = conversion_table[splitted[0]]
+                return splitted.join('.')
+            }
+
+            var bcv = new bcv_parser;
+            for (const note_content of document.getElementsByClassName('note-content')) {
+                var new_text = ""
+                var last_index = 0
+                var parsed = bcv.parse(note_content.innerHTML).osis_and_indices();
+                for (const entry of parsed) {
+                    var original_content = note_content.innerHTML.substr(entry.indices[0], entry.indices[1]-entry.indices[0])
+                    new_text += note_content.innerHTML.substr(last_index, entry.indices[0]-last_index)
+                    new_text += "<a target='_blank' href='https://www.bible.com/bible/1990/" + to_paratext(entry.osis) + "'>" + original_content + "</a>"
+                    last_index = entry.indices[1]
+                }
+                new_text += note_content.innerHTML.substr(last_index)
+                note_content.innerHTML = new_text
+            }
+        </script>
     </body>
 </html>
