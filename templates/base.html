@@ -129,19 +129,30 @@
 
             var bcv = new bcv_parser;
             bcv.set_options({sequence_combination_strategy: "separate"})
-            for (const note_content of document.getElementsByClassName('note-content')) {
-                var new_text = ""
-                var last_index = 0
-                var parsed = bcv.parse(note_content.innerHTML).osis_and_indices();
-                for (const entry of parsed) {
-                    var original_content = note_content.innerHTML.substr(entry.indices[0], entry.indices[1]-entry.indices[0])
-                    new_text += note_content.innerHTML.substr(last_index, entry.indices[0]-last_index)
-                    new_text += "<a target='_blank' href='https://www.bible.com/bible/1990/" + to_paratext(entry.osis) + "'>" + original_content + "</a>"
-                    last_index = entry.indices[1]
+
+            function replace_osis(node) {
+                if (node.children.length > 0) {
+                    Array.from(node.children).forEach(replace_osis)
+                } else {
+                    let new_text = [];
+                    let last_index = 0;
+                    const parsed = bcv.parse(node.innerHTML).osis_and_indices();
+                    parsed.forEach(entry => {
+                        const start = entry.indices[0];
+                        const end = entry.indices[1];
+                        const original_content = node.innerHTML.substring(start, end);
+                        
+                        new_text.push(node.innerHTML.substring(last_index, start));
+                        new_text.push(`<a target='_blank' href='https://www.bible.com/bible/1990/${to_paratext(entry.osis)}'>${original_content}</a>`);
+                        
+                        last_index = end;
+                    });
+
+                    new_text.push(node.innerHTML.substring(last_index));
+                    node.innerHTML = new_text.join('');
                 }
-                new_text += note_content.innerHTML.substr(last_index)
-                note_content.innerHTML = new_text
             }
+            Array.from(document.getElementsByClassName('note-content')).forEach(replace_osis);
         </script>
     </body>
 </html>
