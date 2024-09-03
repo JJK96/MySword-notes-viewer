@@ -131,8 +131,8 @@
             bcv.set_options({sequence_combination_strategy: "separate"})
 
             function replace_osis(node) {
-                if (node.children.length > 0) {
-                    Array.from(node.children).forEach(replace_osis)
+                if (node.childnodes != undefined && node.childnodes.length > 0) {
+                    Array.from(node.childnodes).forEach(replace_osis)
                 } else {
                     let new_text = [];
                     let last_index = 0;
