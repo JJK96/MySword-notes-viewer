@@ -36,6 +36,8 @@ class Note(NoteBase):
         soup = BeautifulSoup(data)
         for title in soup.select('h1'):
             title.extract()
+            # Extract only the first title
+            break
         return soup
 
     @classmethod
