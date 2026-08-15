@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
-{{about}}
+{% if about %}<p>{{about}}</p>{% endif %}
 <form method="GET" action="search">
     <input name="q" placeholder="Zoeken..."/>
     <button type="submit">Zoek</button>
