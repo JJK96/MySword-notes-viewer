@@ -8,11 +8,13 @@ import os
 
 app = Flask(__name__)
 
+db_filename = os.environ.get('DB')
+if not db_filename:
+    dirname = os.path.dirname(__file__)
+    db_filename = os.path.join(dirname, 'versenotes.mybible')
 
 def get_db():
-    dirname = os.path.dirname(__file__)
-    filename = os.path.join(dirname, 'versenotes.mybible')
-    return sqlite3.connect(filename)
+    return sqlite3.connect(db_filename)
 
 
 @dataclass
