@@ -58,7 +58,7 @@ class Note(NoteBase):
 @app.route("/")
 def books():
     book_dict = {i+1: book for i, book in enumerate(book_list)}
-    return render_template('books.html', books=book_dict)
+    return render_template('books.html', books=book_dict, about=os.environ.get('ABOUT', ''))
 
 
 @app.route("/search")
