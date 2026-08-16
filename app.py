@@ -19,8 +19,7 @@ def get_db():
     if 'CACHE_DB' in os.environ:
         # cache the database to a fast filesystem
         dst = '/tmp/versenotes.mybible'
-        max_age = int(os.getenv("CACHE_MAX_AGE", "3600"))
-        if not os.path.exists(dst) or time.time() - os.path.getmtime(dst) > max_age:
+        if not os.path.exists(dst) or os.path.getmtime(dst) < os.path.getmtime(db_filename):
             shutil.copy(db_filename, dst)
         filename = dst
     else:
