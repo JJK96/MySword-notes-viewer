@@ -5,6 +5,8 @@ from bs4 import BeautifulSoup
 from books import get_book, books as book_list
 import sqlite3
 import os
+import time
+import shutil
 
 app = Flask(__name__)
 
@@ -14,6 +16,13 @@ if not db_filename:
     db_filename = os.path.join(dirname, 'versenotes.mybible')
 
 def get_db():
+    if 'CACHE_DB' in os.environ:
+        # cache the database to a fast filesystem
+        dst = '/tmp/versenotes.mybible'
+        max_age = int(os.getenv("CACHE_MAX_AGE", "3600"))
+        if not os.path.exists(dst) or time.time() - os.path.getmtime(dst) > max_age:
+            shutil.copy(db_filename, dst)
+        db_filename = dst
     return sqlite3.connect(db_filename)
 
 
