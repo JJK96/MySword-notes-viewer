@@ -22,8 +22,10 @@ def get_db():
         max_age = int(os.getenv("CACHE_MAX_AGE", "3600"))
         if not os.path.exists(dst) or time.time() - os.path.getmtime(dst) > max_age:
             shutil.copy(db_filename, dst)
-        db_filename = dst
-    return sqlite3.connect(db_filename)
+        filename = dst
+    else:
+        filename = db_filename
+    return sqlite3.connect(filename)
 
 
 @dataclass
