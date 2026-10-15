@@ -50,21 +50,32 @@
         </style>
         <script
             type="module"
-            src="https://unpkg.com/@khmyznikov/pwa-install">
+            src="https://unpkg.com/@khmyznikov/pwa-install?module">
         </script>
     </head>
     <body>
-        <pwa-install manifest-url="{{ url_for('static', filename='manifest.json') }}"></pwa-install>
+        <pwa-install use-local-storage manifest-url="{{ url_for('static', filename='manifest.json') }}"></pwa-install>
 
         <p><button id="installHelp">App toevoegen aan startscherm</button></p>
 
         <script type="module">
           await customElements.whenDefined('pwa-install');
 
-          const install = document.querySelector('#pwaInstall');
+          const install = document.querySelector('pwa-install');
+          const welcomeKey = 'pwa-install-welcome-seen';  
+          const showWelcomeOnce = () => {
+              if (localStorage.getItem(welcomeKey)) return;
+              install.showDialog(true);
+              localStorage.setItem(welcomeKey, 'true');
+          };  
+          if (document.readyState === 'complete') {
+              showWelcomeOnce();
+          } else {
+              window.addEventListener('load', showWelcomeOnce, { once: true });
+          }
 
           document.querySelector('#installHelp').addEventListener('click', () => {
-            install.showDialog();
+             install.showDialog(true);
           });
         </script>
         {% block content %}
