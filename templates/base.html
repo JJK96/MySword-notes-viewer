@@ -121,10 +121,15 @@
                 "Jude": "JUD",
                 "Rev": "REV",
             }
-            function to_paratext(osis) {
+
+            function to_paratext_single_ref(osis) {
                 var splitted = osis.split('.')
                 splitted[0] = conversion_table[splitted[0]]
                 return splitted.join('.')
+            }
+            function to_paratext(osis) {
+                //bible.com does not support a link to multiple versions, so we return just the first.
+                return to_paratext_single_ref(osis.split('-')[0])
             }
 
             var bcv = new bcv_parser;
