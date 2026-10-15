@@ -2,6 +2,7 @@
 <html>
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}">
         {% block header %}
         {% endblock %}
         <style>
@@ -47,8 +48,25 @@
             font-size: 2em;
         }
         </style>
+        <script
+            type="module"
+            src="https://unpkg.com/@khmyznikov/pwa-install">
+        </script>
     </head>
     <body>
+        <pwa-install manifest-url="{{ url_for('static', filename='manifest.json') }}"></pwa-install>
+
+        <p><button id="installHelp">App toevoegen aan startscherm</button></p>
+
+        <script type="module">
+          await customElements.whenDefined('pwa-install');
+
+          const install = document.querySelector('#pwaInstall');
+
+          document.querySelector('#installHelp').addEventListener('click', () => {
+            install.showDialog();
+          });
+        </script>
         {% block content %}
         {% endblock %}
         <script src="{{ url_for('static', filename='nl_bcv_parser.js') }}"></script>

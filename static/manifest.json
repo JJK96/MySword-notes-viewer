@@ -1,0 +1,18 @@
+{
+  "id": "/",
+  "name": "Mysword notes viewer",
+  "short_name": "notes_viewer",
+  "description": "A website to view notes made in Mysword bible app",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#ffffff",
+  "icons": [
+    {
+      "src": "/static/icon.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
