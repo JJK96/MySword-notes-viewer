@@ -56,8 +56,6 @@
     <body>
         <pwa-install use-local-storage manifest-url="{{ url_for('static', filename='manifest.json') }}"></pwa-install>
 
-        <p><button id="installHelp">App toevoegen aan startscherm</button></p>
-
         <script type="module">
           await customElements.whenDefined('pwa-install');
 
@@ -73,10 +71,6 @@
           } else {
               window.addEventListener('load', showWelcomeOnce, { once: true });
           }
-
-          document.querySelector('#installHelp').addEventListener('click', () => {
-             install.showDialog(true);
-          });
         </script>
         {% block content %}
         {% endblock %}
